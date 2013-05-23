@@ -2,6 +2,7 @@
 
 Route::controller(array(
     'admin::home',
+    'admin::users',
     'admin::login',
 ));
 
