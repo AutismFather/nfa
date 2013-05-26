@@ -3,8 +3,12 @@
 <head>
     <meta charset="utf-8">
     <title>Login</title>
-    {{Asset::container('header')->styles()}}
-    <!--[if lt IE 9]>
+	<link href="http://localhost/nfa/admin/css/960.css" media="all" type="text/css" rel="stylesheet">
+	<link href="http://localhost/nfa/admin/css/reset.css" media="all" type="text/css" rel="stylesheet">
+	<link href="http://localhost/nfa/admin/css/text.css" media="all" type="text/css" rel="stylesheet">
+	<link href="http://localhost/nfa/admin/css/login.css" media="all" type="text/css" rel="stylesheet">
+
+	<!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 </head>

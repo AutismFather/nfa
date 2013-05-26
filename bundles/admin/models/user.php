@@ -24,6 +24,6 @@ class User extends Eloquent {
             $count++;
         }
         $result = self::where_username_or_email('StuartD', 'stuart')->first();
-        print_r($result);
+        return $result;
     }
 }

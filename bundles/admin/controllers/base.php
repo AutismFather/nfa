@@ -8,16 +8,29 @@
  */
 class Admin_Base_Controller extends Controller {
     public $restful = true;
-    public $layout = 'admin::layouts.main';
+    public $layout = 'admin::layouts.profi';
 
     public function __construct(){
 
         parent::__construct();
+		$this->layout->title = 'NFA';
+		$this->layout->nest('menumain', 'admin::layouts.menumain');
 
-        Asset::container('header')->bundle('admin');
+		Asset::container('header')->add('960', 'css/960.css');
+		Asset::container('header')->add('reset', 'css/reset.css');
+		Asset::container('header')->add('text', 'css/text.css');
+		Asset::container('header')->add('blue', 'css/blue.css');
+		Asset::container('header')->add('smoothness', 'css/smoothness/ui.css');
 
-        Asset::container('footer')->bundle('admin');
-        Asset::container('footer')->add('jquery', 'http://code.jquery.com/jquery-latest.min.js');
+        Asset::container('header')->add('jquery', 'http://code.jquery.com/jquery-latest.min.js');
+		Asset::container('header')->add('blend', 'js/blend/jquery.blend.js');
+		Asset::container('header')->add('core', 'js/ui.core.js');
+		Asset::container('header')->add('sortable', 'js/ui.sortable.js');
+		Asset::container('header')->add('dialog', 'js/ui.dialog.js');
+		Asset::container('header')->add('datepicker', 'js/ui.datepicker.js');
+		Asset::container('header')->add('effects', 'js/effects.js');
+		Asset::container('header')->add('flot', 'js/flot/jquery.flot.pack.js');
+		Asset::container('header')->add('excanvas', 'js/flot/excanvas.pack.js');
     }
 
     /**

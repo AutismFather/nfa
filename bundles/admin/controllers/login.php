@@ -10,13 +10,17 @@ class Admin_Login_Controller extends Controller {
 
         Config::set('auth.driver', 'adminauth');
 
-        Asset::container('header')->bundle('admin');
-        Asset::container('header')->add('bootstrap', 'css/bootstrap.min.css');
+    	//$assets = Asset::container('header')->bundle('admin');
+		Asset::container('header')->add('960', 'css/960.css');
+		Asset::container('header')->add('reset', 'css/reset.css');
+		Asset::container('header')->add('text', 'css/text.css');
+		Asset::container('header')->add('login', 'css/login.css');
+        //Asset::container('header')->add('bootstrap', 'css/bootstrap.min.css');
 
     }
 
     public function get_index(){
-        return View::make('admin::login.index');
+        return View::make('admin::login.profi')->with('title', 'Login');
     }
 
     public function post_index(){

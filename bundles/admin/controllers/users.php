@@ -10,9 +10,14 @@ class Admin_Users_Controller extends Admin_Base_Controller {
 	 *
 	 */
 	public function get_index(){
-        $searchResult = User::search(array('username' => 'Stuart', 'email' => 'stuart'));
-        print_r($searchResult);
-        exit;
+		Asset::container('footer')->add('datatables', 'js/jquery.dataTables.min.js');
+        $userList = User::order_by('username')->get();
+
+		$this->layout->title = 'Users';
+		$this->layout->nest('content', 'admin::users.index', array(
+			'userList' => $userList
+		));
+		//return View::make('admin::users.index')->with('userList', $userList);
     }
 
 
