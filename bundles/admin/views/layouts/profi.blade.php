@@ -95,7 +95,8 @@
 		<div class="grid_9">
 			<h1 class="dashboard">Users</h1>
 		</div>
-	@yield('content')
+		@yield('notification')
+		@yield('content')
 	<!-- END CONTENT-->
 	</div>
 <div class="clear"> </div>

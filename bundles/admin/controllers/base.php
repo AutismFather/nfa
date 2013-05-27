@@ -21,6 +21,7 @@ class Admin_Base_Controller extends Controller {
 		Asset::container('header')->add('text', 'css/text.css');
 		Asset::container('header')->add('blue', 'css/blue.css');
 		Asset::container('header')->add('smoothness', 'css/smoothness/ui.css');
+		Asset::container('header')->add('datatables', 'css/jquery.dataTables.css');
 
         Asset::container('header')->add('jquery', 'http://code.jquery.com/jquery-latest.min.js');
 		Asset::container('header')->add('blend', 'js/blend/jquery.blend.js');
