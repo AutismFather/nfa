@@ -11,6 +11,7 @@ class Create_User_Groups_Table {
 	{
 		//
 		Schema::create('user_groups', function($table){
+			$table->engine = 'InnoDB';
 			$table->increments('id');
 			$table->string('name', '255');
 			$table->timestamps();
