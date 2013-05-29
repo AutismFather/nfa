@@ -32,6 +32,13 @@ class Admin_Base_Controller extends Controller {
 		Asset::container('header')->add('effects', 'js/effects.js');
 		Asset::container('header')->add('flot', 'js/flot/jquery.flot.pack.js');
 		Asset::container('header')->add('excanvas', 'js/flot/excanvas.pack.js');
+
+		if( Session::has('error') ){
+			$this->layout->nest('notification', 'admin::layouts.notification', array(
+				'status' => 'error',
+				'message' => Session::get('error')
+			));
+		}
     }
 
     /**

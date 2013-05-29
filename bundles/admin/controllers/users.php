@@ -1,4 +1,5 @@
 <?php
+use \Admin\Models\User\Groups;
 use \Admin\Models\User;
 
 /**
@@ -6,19 +7,26 @@ use \Admin\Models\User;
  */
 class Admin_Users_Controller extends Admin_Base_Controller {
 
+	public function __construct(){
+		parent::__construct();
+
+		$this->layout->nest('tabs', 'admin::layouts.tabs', array(
+			'current' => 'Users',
+			'tabs' => array(
+				'Users' => URL::to('/admin/users'),
+				'Add' => URL::to('/admin/users/add'),
+				'User Groups' => URL::to('/admin/usergroups')
+			)
+		));
+	}
 	/**
 	 *
 	 */
 	public function get_index(){
-		if( Session::has('error') ){
-			$this->layout->nest('notification', 'admin::layouts.notification', array(
-				'status' => 'error',
-				'message' => Session::get('error')
-			));
-		}
 		// retrieve list of users
         $userList = User::order_by('username')->get();
 
+		$groups = \Admin\Models\User_Groups::getList();
 		// Set title and show user list
 		$this->layout->title = 'Users';
 		$this->layout->nest('content', 'admin::users.index', array(

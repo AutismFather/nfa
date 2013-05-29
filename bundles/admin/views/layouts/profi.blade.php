@@ -53,15 +53,7 @@
 		<!-- TABS START -->
 		<div id="tabs">
 			<div class="container">
-				<ul>
-					<li><a href="#" class="current"><span>Dashboard elements</span></a></li>
-					<li><a href="forms.html"><span>Content Editing</span></a></li>
-					<li><a href="#"><span>Submenu Link 3</span></a></li>
-					<li><a href="#"><span>Submenu Link 4</span></a></li>
-					<li><a href="#"><span>Submenu Link 5</span></a></li>
-					<li><a href="#"><span>Submenu Link 6</span></a></li>
-					<li><a href="#" class="more"><span>More Submenus</span></a></li>
-				</ul>
+				@yield('tabs')
 			</div>
 		</div>
 		<!-- TABS END -->
@@ -93,7 +85,7 @@
 	<div class="grid_16" id="content">
 		<!--  TITLE START  -->
 		<div class="grid_9">
-			<h1 class="dashboard">Users</h1>
+			<h1 class="dashboard">{{ $title }}</h1>
 		</div>
 		@yield('notification')
 		@yield('content')

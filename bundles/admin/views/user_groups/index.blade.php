@@ -6,33 +6,28 @@
 	<div class="clear"></div>
 	<!--THIS IS A WIDE PORTLET-->
 	<div class="portlet">
-		<div class="portlet-header fixed">{{ HTML::image('images/icons/user.gif', 'Latest Registered Users', array('width' => 16, 'height' => 16)) }} Last Registered users Table Example</div>
+		<div class="portlet-header fixed">{{ HTML::image('images/icons/user.gif', 'User Groups', array('width' => 16, 'height' => 16)) }} User Groups</div>
 		<div class="portlet-content nopadding">
 			<form action="" method="post">
 				<table width="100%" cellpadding="0" cellspacing="0" id="userlist" summary="Employee Pay Sheet">
 					<thead>
 					<tr>
 						<th width="34" scope="col"><input type="checkbox" name="allbox" id="allbox" onclick="checkAll()" /></th>
-						<th width="102" scope="col">Username</th>
-						<th width="102" scope="col">First Name</th>
-						<th width="102" scope="col">Last Name</th>
-						<th width="130" scope="col">E-Mail</th>
+						<th scope="col">Group</th>
 						<th width="90" scope="col">Actions</th>
 					</tr>
 					</thead>
 					<tbody>
-					@foreach( $userList as $user )
+					@foreach( $groups as $group )
 					<tr>
-						<td width="34"><label>
+						<td><label>
 								<input type="checkbox" name="checkbox" id="checkbox" />
 							</label></td>
-						<td>{{ $user->username }}</td>
-						<td>{{ $user->firstname }}</td>
-						<td>{{ $user->lastname }}</td>
-						<td>{{ $user->email }} </td>
-						<td width="90">
-							{{ HTML::link(URL::to_action('admin@users@edit', array($user->id)), '', array('class' => 'edit_icon', 'title' => 'Edit')) }}
-							{{ HTML::link(URL::to_action('admin@users@delete', array($user->id)), '', array('class' => 'delete_icon', 'title' => 'Delete')) }}
+						<td>{{ $group->name }}</td>
+						<td>
+							{{ HTML::link(URL::to_action('admin@usergroups@edit', array($group->id)), '', array('class' => 'edit_icon', 'title' => 'Edit')) }}
+							{{ HTML::link(URL::to_action('admin@usergroups@delete', array($group->id)), '', array('class' => 'delete_icon', 'title' => 'Delete')) }}
+						</td>
 					</tr>
 					@endforeach
 					</tbody>
