@@ -57,4 +57,24 @@ class Admin_Users_Controller extends Admin_Base_Controller {
 			'user' => $user
 		));
 	}
+
+
+	public function get_details($id = 0){
+		if( empty($id) ){
+			Session::flash('error', 'Invalid ID');
+			return Redirect::to('/admin/users');
+		}
+
+		$user = User::find($id);
+
+		if( empty($user) ){
+			Session::flash('error', 'User not found');
+			return Redirect::to('/admin/users');
+		}
+
+		$this->layout->title = 'User details: ' . $user->username;
+		$this->layout->nest('content', 'admin::users.details', array(
+			'user' => $user
+		));
+	}
 }
