@@ -4,12 +4,12 @@
 		<div class="portlet-header">Edit Usergroup {{ $group->name }}</div>
 
 		<div class="portlet-content">
-			{{ Form::open(URL::to('/usergroups/edit/$group->id')) }}
+			{{ Form::open(URL::to_action('admin@usergroups@edit', array($group->id))) }}
 
 			{{ Form::label('name', 'Name') }}
 			{{ Form::input('text', 'name', $group->name, array('class' => 'smallInput')) }}
-			<a class="button"><span>Update Group</span></a>
-			<a class="button_grey"><span>Reset</span></a>
+			<input class="button" type="submit" value="Update Group"/>
+			<input class="button_grey" type="submit" value="Reset" />
 			{{ Form::close() }}
 		</div>
 	</div>

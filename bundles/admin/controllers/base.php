@@ -33,13 +33,21 @@ class Admin_Base_Controller extends Controller {
 		Asset::container('header')->add('flot', 'js/flot/jquery.flot.pack.js');
 		Asset::container('header')->add('excanvas', 'js/flot/excanvas.pack.js');
 
-		if( Session::has('error') ){
+		// Display notification if there is one.
+		if( Session::has('notification') ){
 			$this->layout->nest('notification', 'admin::layouts.notification', array(
-				'status' => 'error',
-				'message' => Session::get('error')
+				'status' => Session::get('notification'),
+				'message' => Session::get('message')
 			));
 		}
     }
+
+
+	public function tabs($array = null){
+		$this->layout->nest('tabs', 'admin::layouts.tabs', array(
+			'tabs' => $array
+		));
+	}
 
     /**
      * Catch-all method for requests that can't be matched.
