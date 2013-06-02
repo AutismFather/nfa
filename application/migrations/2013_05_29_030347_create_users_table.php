@@ -20,7 +20,6 @@ class Create_Users_Table {
 			$table->string('username', 20)->unique();
 			$table->string('password', 50);
 			$table->timestamps();
-			$table->foreign('group_id')->references('id')->on('user_groups');
 		});
 	}
 

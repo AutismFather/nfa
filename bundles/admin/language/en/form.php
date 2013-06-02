@@ -5,5 +5,8 @@ return array(
 	'adduser' => 'Add User',
 
 	'addusergroup' => 'Add User Group',
-	'updateusergroup' => 'Update User Group'
+	'updateusergroup' => 'Update User Group',
+
+	'addcategory' => 'Add Category',
+	'updatecategory' => 'Update Category'
 );

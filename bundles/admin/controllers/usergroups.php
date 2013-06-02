@@ -47,7 +47,7 @@ class Admin_Usergroups_Controller extends Admin_Base_Controller {
 	public function post_add(){
 		// rules
 		$rules = array('name' => array('required', 'unique'));
-		$validator = Validator::make(Input::all(), $rules);
+		$validator = \Laravel\Validator::make(Input::all(), $rules);
 
 		// Failed validation?
 		if( $validator->fails() ){

@@ -8,5 +8,10 @@ return array(
 	'edituser' => 'Edit User: :name',
 	'usergroups' => 'User Groups',
 	'addusergroup' => 'Add User Group',
-	'editusergroup' => 'Edit User Group: :name'
+	'editusergroup' => 'Edit User Group: :name',
+
+	'categories' => 'Categories',
+	'addcategory' => 'Add Category',
+	'editcategory' => 'Edit Category: :name',
+	'categories_subheading' => 'All Categories'
 );
