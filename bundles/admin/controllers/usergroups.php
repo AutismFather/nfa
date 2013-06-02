@@ -111,8 +111,7 @@ class Admin_Usergroups_Controller extends Admin_Base_Controller {
 
 		// If validator does not fail
 		\Admin\Models\User_Groups::where('id', '=', $id)->update(array('name' => Input::get('name')));
-		Session::flash('success', 'User group successfully updated');
-		return Redirect::to(URL::to_action('admin@usergroups'));
+		return \Admin\Libraries\Notify::set('success', 'usergroupsedit', URL::to_action('admin@usergroups'));
 	}
 
 	/**
