@@ -10,25 +10,23 @@ class Admin_Users_Controller extends Admin_Base_Controller {
 	public function __construct(){
 		parent::__construct();
 
-		$this->layout->nest('tabs', 'admin::layouts.tabs', array(
-			'current' => 'Users',
-			'tabs' => array(
-				'Users' => URL::to('/admin/users'),
-				'Add' => URL::to('/admin/users/add'),
-				'User Groups' => URL::to('/admin/usergroups')
-			)
+		// Create tabs for this page
+		$this->tabs(array(
+			array(__('Admin::title.users'), URL::to_action('admin@users')),
+			array(__('Admin::title.add'), URL::to_action('admin@users@add')),
+			array(__('Admin::title.usergroups'), URL::to_action('admin@usergroups'))
 		));
 	}
 	/**
-	 *
+	 * Admin/Users::get_index()
+	 * Returns the main index - list of users
 	 */
 	public function get_index(){
 		// retrieve list of users
         $userList = User::order_by('username')->get();
 
-		$groups = \Admin\Models\User_Groups::getList();
 		// Set title and show user list
-		$this->layout->title = 'Users';
+		$this->layout->title = __('Admin::title.users');
 		$this->layout->nest('content', 'admin::users.index', array(
 			'userList' => $userList
 		));
@@ -40,29 +38,36 @@ class Admin_Users_Controller extends Admin_Base_Controller {
 	 * @return mixed
 	 */
 	public function get_add(){
-		$this->layout->title = 'Add User';
-        $this->layout->nest('content', 'admin::users.add');
+		// Get list of user groups
+		$groups = \Admin\Models\User_Groups::getList();
+
+		$this->layout->title = __('Admin::title.adduser');
+        $this->layout->nest('content', 'admin::users.add', array(
+			'groups' => $groups
+		));
     }
 
 	public function get_edit($id = 0){
 		// If the person has not entered an id for some reason, redirect back
 		if( empty($id) ){
-			Session::flash('error', 'Invalid ID');
-			return Redirect::to('/admin/users');
+			return \Admin\Libraries\Notify::set('error', 'invalidid', URL::to_action('admin@users'));
 		}
 		// retrieve database record
 		$user = User::find($id);
 
+		// Get the user group list
+		$groups = \Admin\Models\User_Groups::getList();
+
 		// if there was no user found in the db with that id, redirect back
 		if( empty($user) ){
-			Session::flash('error', 'User not found');
-			return Redirect::to('/admin/users');
+			return \Admin\Libraries\Notify::set('error', 'nouserfound', URL::to_action('admin@users'));
 		}
 
 		// Display template
-		$this->layout->title = 'Edit User: ' . $user->username;
+		$this->layout->title = __('Admin::title.edituser', array('name' => $user->username));
 		$this->layout->nest('content', 'admin::users.edit', array(
-			'user' => $user
+			'user' => $user,
+			'groups' => $groups
 		));
 	}
 

@@ -18,9 +18,12 @@ class Admin_Usergroups_Controller extends Admin_Base_Controller {
 		));
 	}
 
+	/**
+	 * Admin/User_Groups::get_index()
+	 */
 	public function get_index(){
 		// Retrieve list of groups from the database
-		$groups = \Admin\Models\User_Groups::getList();
+		$groups = \Admin\Models\User_Groups::order_by('name')->get();
 
 		$this->layout->title = __('Admin::title.usergroups');
 		$this->layout->nest('content', 'admin::user_groups.index', array(

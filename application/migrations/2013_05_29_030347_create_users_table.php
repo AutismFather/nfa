@@ -13,7 +13,7 @@ class Create_Users_Table {
 		Schema::create('users', function($table){
 			$table->engine = 'InnoDB';
 			$table->increments('id');
-			$table->integer('group_id')->index();
+			$table->integer('user_groups_id')->index();
 			$table->string('firstname', 100);
 			$table->string('lastname', 100);
 			$table->string('email', 100)->unique();

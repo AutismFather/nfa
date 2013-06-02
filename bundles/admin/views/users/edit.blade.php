@@ -6,6 +6,9 @@
 		<div class="portlet-content">
 			{{ Form::open(URL::to('/users/edit/$user->id')) }}
 
+			{{ Form::label('user_group_id', 'User Groups: ') }}
+			{{ Form::select('user_group_id', $groups, $user->user_group_id, array('class' => 'smallInput')) }}
+
 			{{ Form::label('firstname', 'First Name: ') }}
 			{{ Form::input('text', 'firstname', $user->firstname, array('class' => 'smallInput')) }}
 

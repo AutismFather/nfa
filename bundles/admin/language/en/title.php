@@ -4,6 +4,8 @@ return array(
 	'edit' => 'Edit',
 	'delete' => 'Delete',
 	'users' => 'Users',
+	'adduser' => 'Add User',
+	'edituser' => 'Edit User: :name',
 	'usergroups' => 'User Groups',
 	'addusergroup' => 'Add User Group',
 	'editusergroup' => 'Edit User Group: :name'

@@ -8,8 +8,8 @@
 
 			{{ Form::label('name', 'Name') }}
 			{{ Form::input('text', 'name', $group->name, array('class' => 'smallInput')) }}
-			<input class="button" type="submit" value="Update Group"/>
-			<input class="button_grey" type="submit" value="Reset" />
+			<input class="button" type="submit" value="{{ __('Admin::form.updateusergroup') }}"/>
+			<input class="button_grey" type="submit" value="{{ __('Admin::form.reset') }}" />
 			{{ Form::close() }}
 		</div>
 	</div>

@@ -1,7 +1,9 @@
 <?php
 return array(
 	'invalidid' => 'ID Invalid',
-	'nogroupfound' => 'No group found',
 
+	'nouserfound' => 'No User Found',
+
+	'nogroupfound' => 'No group found',
 	'usergroupsedit' => 'User group successfully updated'
 );

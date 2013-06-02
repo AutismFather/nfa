@@ -11,6 +11,14 @@ use \Laravel\Database\Eloquent\Model as Eloquent;
 
 class User_Groups extends Eloquent {
 	public static function getList(){
-		return self::order_by('name')->get();
+		$results = self::order_by('name')->get();
+		$array = array();
+		if( empty($results) ){
+			return false;
+		}
+		foreach( $results as $row ){
+			$array[$row->id] = $row->name;
+		}
+		return $array;
 	}
 }
