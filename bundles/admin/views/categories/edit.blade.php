@@ -4,7 +4,7 @@
 		<div class="portlet-header">{{ __('admin::title.editcategory', array('name' => $category->name)) }}</div>
 
 		<div class="portlet-content">
-			{{ Form::open(URL::to_action('admin@category@edit', array($category->id))) }}
+			{{ Form::open(URL::to_action('admin@categories@edit', array($category->id))) }}
 
 			{{ Form::label('name', 'Name') }}
 			{{ Form::input('text', 'name', $category->name, array('class' => 'smallInput')) }}

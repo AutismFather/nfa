@@ -80,6 +80,24 @@ class Admin_Categories_Controller extends Admin_Base_Controller {
 	}
 
 	public function post_edit($id = 0){
+		// Not id in the param list
+		if( empty($id) ){
+			return \Admin\Libraries\Notify::set('error', 'invalidid', \Laravel\URL::to_action('admin@categories'));
+		}
 
+		$rules = array('name' => 'required');
+		$validator = \Laravel\Validator::make(Input::all(), $rules);
+
+		if( $validator->fails() ){
+			return \Admin\Libraries\Notify::set('error', array('isrequired', array('field' => 'Category Name')), URL::to_action('admin@categories'));
+		}
+
+		$name = Input::get('name');
+		$slug = \Admin\Libraries\Slug::make($name);
+
+		// Update database
+		Category::update($id, array('name' => $name, 'slug' => $slug));
+
+		return \Admin\Libraries\Notify::set('success', 'categoryupdated', \Laravel\URL::to_action('admin@categories'));
 	}
 }

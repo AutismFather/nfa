@@ -12,6 +12,8 @@ use \Laravel\Database\Eloquent\Model as Eloquent;
 
 class User extends Eloquent {
 
+	public static $timestamps = true;
+
 	public function user_groups(){
 		$this->belongs_to('User_Groups');
 	}

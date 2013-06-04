@@ -9,5 +9,6 @@ return array(
 	'usergroupsedit' => 'User group successfully updated',
 
 	'categoryadded' => 'Category successfully added',
+	'categoryupdated' => 'Category successfully updated',
 	'nocategoryfound' => 'No category found'
 );

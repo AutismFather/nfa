@@ -10,6 +10,12 @@ namespace Admin\Models;
 use \Laravel\Database\Eloquent\Model as Eloquent;
 
 class User_Groups extends Eloquent {
+	public static $timestamps = true;
+
+	/**
+	 * Returns an array that can be used in a select/dropdown
+	 * @return array|bool
+	 */
 	public static function getList(){
 		$results = self::order_by('name')->get();
 		$array = array();
