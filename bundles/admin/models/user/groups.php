@@ -12,6 +12,9 @@ use \Laravel\Database\Eloquent\Model as Eloquent;
 class User_Groups extends Eloquent {
 	public static $timestamps = true;
 
+	public function users(){
+		$this->has_many('users');
+	}
 	/**
 	 * Returns an array that can be used in a select/dropdown
 	 * @return array|bool

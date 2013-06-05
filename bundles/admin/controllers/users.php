@@ -1,6 +1,7 @@
 <?php
 use \Admin\Models\User\Groups;
 use \Admin\Models\User;
+use Laravel\URL;
 
 /**
  * Class Admin_Users_Controller
@@ -40,6 +41,9 @@ class Admin_Users_Controller extends Admin_Base_Controller {
 	public function get_add(){
 		// Get list of user groups
 		$groups = \Admin\Models\User_Groups::getList();
+		if( empty($groups) ){
+			return \Admin\Libraries\Notify::set('error', 'groupsrequired', URL::to_action('admin@usergroups@add'));
+		}
 
 		$this->layout->title = __('Admin::title.adduser');
         $this->layout->nest('content', 'admin::users.add', array(

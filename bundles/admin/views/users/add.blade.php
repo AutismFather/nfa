@@ -17,8 +17,8 @@
 
 {{ Form::label('email', 'E-Mail: ') }}
 {{ Form::input('text', 'email', null, array('class' => 'smallInput')) }}
-<a class="button"><span>{{ __('Admin::form.adduser') }}</span></a>
-<a class="button_grey"><span>{{ __('Admin::form.reset') }}</span></a>
+<input type="submit" value="{{ __('Admin::form.adduser') }}" class="button"/>
+<input type="reset" value="{{ __('Admin::form.reset') }}" class="button_grey"/>
 {{ Form::close() }}
 </div>
 </div>

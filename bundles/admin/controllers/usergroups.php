@@ -1,6 +1,9 @@
 <?php
-use \Admin\Models\User\Groups;
-use \Admin\Models\User;
+use Admin\Libraries\Notify;
+use Admin\Models\User;
+use Admin\Models\User_Groups;
+use Laravel\URL;
+use Laravel\Validator;
 
 /**
  * Class Admin_Users_Controller
@@ -23,7 +26,7 @@ class Admin_Usergroups_Controller extends Admin_Base_Controller {
 	 */
 	public function get_index(){
 		// Retrieve list of groups from the database
-		$groups = \Admin\Models\User_Groups::order_by('name')->get();
+		$groups = User_Groups::order_by('name')->get();
 
 		$this->layout->title = __('Admin::title.usergroups');
 		$this->layout->nest('content', 'admin::user_groups.index', array(
@@ -46,8 +49,8 @@ class Admin_Usergroups_Controller extends Admin_Base_Controller {
 	 */
 	public function post_add(){
 		// rules
-		$rules = array('name' => array('required', 'unique'));
-		$validator = \Laravel\Validator::make(Input::all(), $rules);
+		$rules = array('name' => array('required'));
+		$validator = Validator::make(Input::all(), $rules);
 
 		// Failed validation?
 		if( $validator->fails() ){
@@ -56,7 +59,7 @@ class Admin_Usergroups_Controller extends Admin_Base_Controller {
 		}
 		// Passed validation
 		else {
-			\Admin\Models\User_Groups::insert(array('name' => Input::get('name')));
+			User_Groups::insert(array('name' => Input::get('name')));
 
 			Session::flash('success', 'User group successfully added');
 			return Redirect::to(URL::to('/admin/usergroups'));
@@ -73,12 +76,13 @@ class Admin_Usergroups_Controller extends Admin_Base_Controller {
 	public function get_edit($id = 0){
 		// If no id as a param
 		if( empty($id) ){
-			return \Admin\Libraries\Notify::set('error', 'invalidid', URL::to_action('admin@usergroups'));
+			return Notify::set('error', 'invalidid', URL::to_action('admin@usergroups'));
 		}
 
-		$group = \Admin\Models\User_Groups::find($id);
+		// retrieve group
+		$group = User_Groups::find($id);
 		if( empty($group) ){
-			return \Admin\Libraries\Notify::set('error', 'nogroupfound', URL::to_action('admin@usergroups'));
+			return Notify::set('error', 'nogroupfound', URL::to_action('admin@usergroups'));
 		}
 
 		$this->layout->title = __('Admin::title.editusergroup', array('name' => $group->name));;
@@ -104,7 +108,7 @@ class Admin_Usergroups_Controller extends Admin_Base_Controller {
 		$rules = array(
 			'name' => array('required', 'unique:user_groups,name,'.$id)
 		);
-		$validator = \Laravel\Validator::make(Input::all(), $rules);
+		$validator = Validator::make(Input::all(), $rules);
 
 		// If form submission fails, go back to edit
 		if( $validator->fails() ){
@@ -113,8 +117,8 @@ class Admin_Usergroups_Controller extends Admin_Base_Controller {
 		}
 
 		// If validator does not fail
-		\Admin\Models\User_Groups::where('id', '=', $id)->update(array('name' => Input::get('name')));
-		return \Admin\Libraries\Notify::set('success', 'usergroupsedit', URL::to_action('admin@usergroups'));
+		User_Groups::where('id', '=', $id)->update(array('name' => Input::get('name')));
+		return Notify::set('success', 'usergroupsedit', URL::to_action('admin@usergroups'));
 	}
 
 	/**
@@ -126,11 +130,18 @@ class Admin_Usergroups_Controller extends Admin_Base_Controller {
 	 */
 	public function get_delete($id = 0){
 		if( empty($id) ){
-			\Admin\Libraries\Notify::set('error', 'invalidid', URL::to_action('admin@usergroups'));
+			Notify::set('error', 'invalidid', URL::to_action('admin@usergroups'));
 		}
 
-		\Admin\Models\User_Groups::where('id', '=', $id)->delete();
-		Session::flash('success', 'User group deleted');
-		return Redirect::to(URL::to_action('admin@usergroups'));
+		// Get the group to ensure it exists and for the notification
+		$group = User_Groups::find($id);
+		if( empty($group) ){
+			return Notify::set('error', 'nogroupfound', URL::to_action('admin@usergroups'));
+		}
+
+		// delete the usergroup
+		User_Groups::where('id', '=', $id)->delete();
+
+		return Notify::set('success', array('groupdeleted', array('name' => $group->name)), URL::to_action('admin@usergroups'));
 	}
 }

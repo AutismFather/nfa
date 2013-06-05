@@ -79,6 +79,13 @@ class Admin_Categories_Controller extends Admin_Base_Controller {
 		));
 	}
 
+	/**
+	 * Admin/Categories::post_edit($id = 0)
+	 * Handles form submission for edit
+	 *
+	 * @param int $id
+	 * @return \Laravel\Redirect
+	 */
 	public function post_edit($id = 0){
 		// Not id in the param list
 		if( empty($id) ){
@@ -99,5 +106,24 @@ class Admin_Categories_Controller extends Admin_Base_Controller {
 		Category::update($id, array('name' => $name, 'slug' => $slug));
 
 		return \Admin\Libraries\Notify::set('success', 'categoryupdated', \Laravel\URL::to_action('admin@categories'));
+	}
+
+	public function get_delete($id = 0){
+		// Not id in the param list
+		if( empty($id) ){
+			return \Admin\Libraries\Notify::set('error', 'invalidid', \Laravel\URL::to_action('admin@categories'));
+		}
+
+		// retrieve category to ensure it's there first
+		$category = Category::find($id);
+		if( empty($category) ){
+			return \Admin\Libraries\Notify::set('error', 'nocategoryfound', URL::to_action('admin@categories'));
+		}
+
+		// Delete the category
+		Category::where('id', '=', $id)->delete();
+
+		// Notify user of the deletion and redirect back to list
+		return \Admin\Libraries\Notify::set('success', array('categorydeleted', array('name' => $category->name)), URL::to_action('admin@categories'));
 	}
 }
