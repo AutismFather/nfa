@@ -13,28 +13,26 @@
 					<thead>
 					<tr>
 						<th width="34" scope="col"><input type="checkbox" name="allbox" id="allbox" onclick="checkAll()" /></th>
-						<th width="102" scope="col">Group</th>
-						<th width="102" scope="col">Username</th>
-						<th width="102" scope="col">First Name</th>
-						<th width="102" scope="col">Last Name</th>
-						<th width="130" scope="col">E-Mail</th>
+						<th width="102" scope="col">Name</th>
+						<th width="102" scope="col">Category</th>
+						<th width="102" scope="col">SKU</th>
+						<th width="102" scope="col">Price</th>
 						<th width="90" scope="col">Actions</th>
 					</tr>
 					</thead>
 					<tbody>
-					@foreach( $userList as $user )
+					@foreach( $products as $product )
 					<tr>
 						<td width="34"><label>
 								<input type="checkbox" name="checkbox" id="checkbox" />
 							</label></td>
-						<td>{{ $user->user_group->name }}</td>
-						<td>{{ $user->username }}</td>
-						<td>{{ $user->firstname }}</td>
-						<td>{{ $user->lastname }}</td>
-						<td>{{ $user->email }} </td>
+						<td>{{ $product->name }}</td>
+						<td>{{ $product->category->name }}</td>
+						<td>{{ $product->sku }}</td>
+						<td>{{ $product->price }} </td>
 						<td width="90">
-							{{ HTML::link(URL::to_action('admin@users@edit', array($user->id)), '', array('class' => 'edit_icon', 'title' => 'Edit')) }}
-							{{ HTML::link(URL::to_action('admin@users@delete', array($user->id)), '', array('class' => 'delete_icon', 'title' => 'Delete')) }}
+							{{ HTML::link(URL::to_action('admin@products@edit', array($product->id)), '', array('class' => 'edit_icon', 'title' => 'Edit')) }}
+							{{ HTML::link(URL::to_action('admin@products@delete', array($product->id)), '', array('class' => 'delete_icon', 'title' => 'Delete')) }}
 					</tr>
 					@endforeach
 					</tbody>

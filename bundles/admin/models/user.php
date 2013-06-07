@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by JetBrains PhpStorm.
- * User: Stuart
- * Date: 22/05/13
- * Time: 10:55 PM
- * To change this template use File | Settings | File Templates.
- */
 
 namespace Admin\Models;
 use \Laravel\Database\Eloquent\Model as Eloquent;
@@ -15,7 +8,7 @@ class User extends Eloquent {
 	public static $timestamps = true;
 
 	public function user_group(){
-		return $this->belongs_to('User_Groups');
+		return $this->belongs_to('Admin\Models\User_Groups', 'user_groups_id');
 	}
 
     public static function search($array = null){

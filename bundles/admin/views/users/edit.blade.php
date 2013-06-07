@@ -4,10 +4,13 @@
 		<div class="portlet-header">Anything  (no icon too if you like it better)</div>
 
 		<div class="portlet-content">
-			{{ Form::open(URL::to('/users/edit/$user->id')) }}
+			{{ Form::open(URL::to_action('admin@users@edit', array($user->id))) }}
 
-			{{ Form::label('user_group_id', 'User Groups: ') }}
-			{{ Form::select('user_group_id', $groups, $user->user_group_id, array('class' => 'smallInput')) }}
+			{{ Form::label('user_groups_id', 'User Groups: ') }}
+			{{ Form::select('user_groups_id', $groups, $user->user_groups_id, array('class' => 'smallInput')) }}
+
+			{{ Form::label('username', 'Username') }}
+			{{ Form::input('text', 'username', $user->username, array('class' => 'smallInput')) }}
 
 			{{ Form::label('firstname', 'First Name: ') }}
 			{{ Form::input('text', 'firstname', $user->firstname, array('class' => 'smallInput')) }}
@@ -17,11 +20,8 @@
 
 			{{ Form::label('email', 'E-Mail: ') }}
 			{{ Form::input('text', 'email', $user->email, array('class' => 'smallInput')) }}
-
-			{{ Form::label('username', 'Username') }}
-			{{ Form::input('text', 'username', $user->username, array('class' => 'smallInput')) }}
-			<a class="button"><span>Add User</span></a>
-			<a class="button_grey"><span>Reset</span></a>
+			<input type="submit" value="{{ __('admin::form.edituser') }}" class="button"/>
+			<input type="reset" value="{{ __('admin::form.reset') }}" class="button_grey"/>
 			{{ Form::close() }}
 		</div>
 	</div>

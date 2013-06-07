@@ -13,5 +13,9 @@ return array(
 	'categories' => 'Categories',
 	'addcategory' => 'Add Category',
 	'editcategory' => 'Edit Category: :name',
-	'categories_subheading' => 'All Categories'
+	'categories_subheading' => 'All Categories',
+
+	'products' => 'Products',
+	'addproduct' => 'Add Product',
+	'editproduct' => 'Edit Product: :name',
 );

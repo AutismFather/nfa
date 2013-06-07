@@ -24,7 +24,7 @@ class Admin_Users_Controller extends Admin_Base_Controller {
 	 */
 	public function get_index(){
 		// retrieve list of users
-        $userList = User::order_by('username')->get();
+        $userList = User::with('user_group')->order_by('username')->get();
 
 		// Set title and show user list
 		$this->layout->title = __('Admin::title.users');
@@ -51,6 +51,19 @@ class Admin_Users_Controller extends Admin_Base_Controller {
 		));
     }
 
+	public function post_add(){
+		$rules = array('email' => 'required');
+		$validation = new \Laravel\Validator(Input::all(), $rules);
+
+		if( $validation->fails() ){
+			return \Admin\Libraries\Notify::set('error', array('isrequired' => array('field' => 'Email Address')), URL::to_action('admin@users@add'));
+		}
+
+		User::insert(Input::all());
+
+		return \Admin\Libraries\Notify::set('success', 'useradded', URL::to_action('admin@users'));
+	}
+
 	public function get_edit($id = 0){
 		// If the person has not entered an id for some reason, redirect back
 		if( empty($id) ){
@@ -75,6 +88,22 @@ class Admin_Users_Controller extends Admin_Base_Controller {
 		));
 	}
 
+	public function post_edit($id = 0){
+		if( empty($id) ){
+			return \Admin\Libraries\Notify::set('error', 'invalidid', URL::to_action('admin@users'));
+		}
+
+		$rules = array('email' => 'required', 'username' => 'required');
+		$validator = new \Laravel\Validator(Input::all(), $rules);
+
+		if( $validator->fails() ){
+			return \Admin\Libraries\Notify::set('error', array('isrequired' => array('field' => 'Email')), URL::to_action('admin@users@edit', array($id)));
+		}
+
+		User::update($id, Input::all());
+
+		return \Admin\Libraries\Notify::set('success', 'userupdated', URL::to_action('admin@users'));
+	}
 
 	public function get_details($id = 0){
 		if( empty($id) ){

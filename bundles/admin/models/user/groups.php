@@ -16,7 +16,7 @@ class User_Groups extends Eloquent {
 	 * User groups have many users
 	 */
 	public function users(){
-		return $this->has_many('User');
+		return $this->has_many('Admin\Models\User');
 	}
 	/**
 	 * Returns an array that can be used in a select/dropdown

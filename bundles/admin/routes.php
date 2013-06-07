@@ -5,7 +5,8 @@ Route::controller(array(
     'admin::users',
     'admin::login',
 	'admin::usergroups',
-	'admin::categories'
+	'admin::categories',
+	'admin::products'
 ));
 
 Route::filter('auth', function(){

@@ -9,6 +9,9 @@
 {{ Form::label('user_groups_id', 'User Group:') }}
 {{ Form::select('user_groups_id', $groups, null, array('class' => 'smallInput')) }}
 
+{{ Form::label('username', 'Username') }}
+{{ Form::input('text', 'username', null, array('class' => 'smallInput')) }}
+
 {{ Form::label('firstname', 'First Name: ') }}
 {{ Form::input('text', 'firstname', null, array('class' => 'smallInput')) }}
 
