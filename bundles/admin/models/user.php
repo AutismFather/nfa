@@ -14,8 +14,8 @@ class User extends Eloquent {
 
 	public static $timestamps = true;
 
-	public function user_groups(){
-		$this->belongs_to('User_Groups');
+	public function user_group(){
+		return $this->belongs_to('User_Groups');
 	}
 
     public static function search($array = null){
