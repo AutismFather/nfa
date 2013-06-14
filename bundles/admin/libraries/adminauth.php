@@ -1,6 +1,6 @@
 <?php
 namespace Admin\Libraries;
-use Admin\Models\Admin as Admin, Laravel\Auth\Drivers\Eloquent as Eloquent, Laravel\Hash, Laravel\Config;
+use Admin\Models\User as User, Laravel\Auth\Drivers\Eloquent as Eloquent, Laravel\Hash, Laravel\Config;
 class AdminAuth extends Eloquent{
 
     /**
@@ -60,7 +60,7 @@ class AdminAuth extends Eloquent{
     }
 
     protected function model(){
-        return new Admin;
+        return new User;
     }
 
 }
