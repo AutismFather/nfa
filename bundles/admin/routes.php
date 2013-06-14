@@ -9,6 +9,11 @@ Route::controller(array(
 	'admin::products'
 ));
 
-Route::filter('auth', function(){
-    if (Auth::guest()) return Redirect::to(URL::to_action('admin::login'));
+Route::filter('before', function()
+{
+    if ( ! Auth::check() && ! URI::is('login'))
+    {
+        //return Redirect::to_secure('login', 307);
+        return Laravel\Redirect::to(\Laravel\URL::to_action('admin@login'));
+    }
 });
