@@ -1,4 +1,11 @@
 <?php
+
+use Laravel\Asset;
+use Laravel\Auth;
+use Laravel\Config;
+use Laravel\Redirect;
+use Laravel\Routing\Controller;
+use Laravel\URL;
 /**
  * Created by JetBrains PhpStorm.
  * User: Stuart
@@ -40,15 +47,35 @@ class Admin_Base_Controller extends Controller {
 				'message' => Session::get('message')
 			));
 		}
+
+        // Default section setting for the main menu
+        $this->setSection('dashboard');
     }
 
-
+    /**
+     * Admin/Base::tabs()
+     * 
+     * @param type $array
+     */
 	public function tabs($array = null){
 		$this->layout->nest('tabs', 'admin::layouts.tabs', array(
 			'tabs' => $array
 		));
 	}
 
+    public function setSection($x = ''){
+        $sections = Config::get('admin::sections');
+        $sectionArray = array();
+        foreach( $sections as $key => $section ){
+            if( $x == $key ){
+                $section[$key]['current'] = true;
+            }
+            $sectionArray[] = $section;
+        }
+
+        $this->layout->share('sections', $sectionArray);
+     }
+  
     /**
      * Catch-all method for requests that can't be matched.
      *
