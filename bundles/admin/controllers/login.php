@@ -1,9 +1,7 @@
 <?php
 
-class Admin_Login_Controller extends Controller {
-
-    public $restful = true;
-
+class Admin_Login_Controller extends Admin_Base_Controller {
+      
     public function __construct(){
 
         parent::__construct();
@@ -30,7 +28,7 @@ class Admin_Login_Controller extends Controller {
             'password' => Input::get('password'),
         );
 
-        if(Auth::attempt($creds)){
+        if(\Laravel\Auth::attempt($creds, true)){
             return Redirect::to(URL::to_action('admin::home@index'));
         } else {
             return Redirect::back()->with('error', true);
