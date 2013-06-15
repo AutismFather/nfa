@@ -1,5 +1,6 @@
 <?php
 return array(
+    'login' => 'Login',
 	'add' => 'Add',
 	'edit' => 'Edit',
 	'delete' => 'Delete',
