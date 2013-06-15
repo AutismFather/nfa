@@ -1,5 +1,12 @@
 <?php
 
+use Laravel\Asset;
+use Laravel\Auth;
+use Laravel\Config;
+use Laravel\Redirect;
+use Laravel\URL;
+use Laravel\View;
+
 class Admin_Login_Controller extends Admin_Base_Controller {
       
     public function __construct(){
@@ -18,7 +25,8 @@ class Admin_Login_Controller extends Admin_Base_Controller {
     }
 
     public function get_index(){
-        return View::make('admin::login.profi')->with('title', 'Login');
+        $title = __('admin::title.login');
+        return View::make('admin::login.profi')->with('title', $title);
     }
 
     public function post_index(){
@@ -28,8 +36,11 @@ class Admin_Login_Controller extends Admin_Base_Controller {
             'password' => Input::get('password'),
         );
 
-        if(\Laravel\Auth::attempt($creds, true)){
-            return Redirect::to(URL::to_action('admin::home@index'));
+        // Remember me box?
+        $rememberme = Input::get('rememberme', false);
+
+        if(Auth::attempt($creds, $rememberme) != false ){
+            return Redirect::to(URL::to_action('admin@home@index'));
         } else {
             return Redirect::back()->with('error', true);
         }
