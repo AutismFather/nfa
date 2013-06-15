@@ -1,5 +1,11 @@
 <?php
 
+use Laravel\Auth;
+use Laravel\Redirect;
+use Laravel\Routing\Route;
+use Laravel\URI;
+use Laravel\URL;
+
 Route::controller(array(
     'admin::home',
     'admin::users',
@@ -9,11 +15,17 @@ Route::controller(array(
 	'admin::products'
 ));
 
+Route::any('(:bundle)/logout', function() {
+    Auth::logout();
+    return Redirect::to(URL::to_action('admin@login'));
+});
+
+
 Route::filter('before', function()
 {
     if ( ! Auth::check() && ! URI::is('login'))
     {
         //return Redirect::to_secure('login', 307);
-        return Laravel\Redirect::to(\Laravel\URL::to_action('admin@login'));
+        return Redirect::to(URL::to_action('admin@login'));
     }
 });
