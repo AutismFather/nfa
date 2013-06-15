@@ -11,8 +11,9 @@
 	<div class="grid_6 prefix_5 suffix_5">
 		<h1>Profi Admin - Login</h1>
 		<div id="login">
-			<p class="tip">You just need to hit the button and you're in!</p>
-			<p class="error">This is when something is wrong!</p>
+			@if( Session::get('error') )
+			<p class="error">Invalid Login</p>
+            @endif
 			<form id="form1" name="form1" method="post" action="{{ URL::to_action('admin@login') }}">
 				<p>
 					<label><strong>Username</strong>
@@ -26,7 +27,7 @@
 				</p>
                 <input type='submit' value='Authentication' class='black_button'/>
 				<label>
-					<input type="checkbox" name="checkbox" id="checkbox" />
+					<input type="checkbox" name="rememberme" id="checkbox" />
 					Remember me</label>
 			</form>
 			<br clear="all" />
