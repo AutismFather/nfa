@@ -7,12 +7,13 @@ class Admin_Products_Controller extends Admin_Base_Controller{
 
 	public function __construct(){
 		parent::__construct();
-                // Makes the menu select the products item as the current one
-                $this->layout->share('section_products', 'current');
+        // Makes the menu select the products item as the current one
+        $this->layout->share('section_products', 'current');
 
 		$this->tabs(array(
 			array(__('admin::title.products'), \Laravel\URL::to_action('admin@products')),
-			array(__('admin::title.add'), \Laravel\URL::to_action('admin@products@add'))
+			array(__('admin::title.add'), \Laravel\URL::to_action('admin@products@add')),
+            array(__('admin::title.categories'), Laravel\URL::to_action('admin@categories'))
 		));
 	}
 
