@@ -1,0 +1,1 @@
+<?phpuse \Laravel\Database\Eloquent\Model as Eloquent;class User extends Eloquent {}?>
